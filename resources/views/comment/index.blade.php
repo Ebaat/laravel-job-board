@@ -1,5 +1,5 @@
 <x-layout :title="$title">
-    <h2>comments exploring (testing)</h2>
+    <h2>comments</h2>
     @foreach ($comments as $comment)
     <h3>{{ $comment->author }}</h3>
     <p>{{ $comment->content }}</p>

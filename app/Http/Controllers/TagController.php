@@ -2,45 +2,67 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    function index()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        $data = Tag::all();
-        return view('tag.index', ['tags' => $data, 'title' => 'Tags']);
+        $tags = Tag::all();
+        return view('tag.index', ['tags' => $tags, 'title' => 'Tags']);
     }
 
-
-    function create()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        Tag::create([
-            'title' => 'Css',
-        ]);
-        return redirect('/tags');
+        return view('tag.create', ['title' => 'Create Tag']);
     }
-    function testmanytomany()
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
-        // $post1 = Post::find(1);
-        // $post3 = Post::find(3);
+        //
+    }
 
-        // $post1->tags()->attach([1, 2]);
-        // $post3->tags()->attach([3]);
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $tag = Tag::findOrFail($id);
+        return view('tag.show', ['tag' => $tag, 'title' => 'Tag Detail']);
+    }
 
-        // return response()->json([
-        //     'post1_tags' => $post1->tags,
-        //     'post3_tags' => $post3->tags,
-        // ]);
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $tag = Tag::findOrFail($id);
+        return view('tag.edit', ['tag' => $tag, 'title' => 'Edit Tag']);
+    }
 
-        $tag = Tag::find(2);
-        $tag->posts()->attach([3]);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
-        return response()->json([
-            'tag' => $tag->title,
-            'posts' => $tag->posts,
-        ]);
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }

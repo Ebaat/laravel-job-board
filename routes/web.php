@@ -1,33 +1,28 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
 use Symfony\Component\Routing\Route as RoutingRoute;
 
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/', IndexController::class);
+Route::get('/about', AboutController::class);
+Route::get('/contact', ContactController::class);
+
 
 Route::get('/job', [JobsController::class, 'index']);
 
-Route::get('/about', [IndexController::class, 'about']);
+Route::resource('blog', PostController::class);
 
-Route::get('/contact', [IndexController::class, 'contact']);
+Route::resource('comments', CommentController::class);
 
-Route::get('/blog', [PostController::class, 'index']);
+Route::resource('tags', TagController::class);
 
-Route::get('/blog/create', [PostController::class, 'create']);
 
-Route::get('/blog/delete', [PostController::class, 'delete']);
-
-Route::get('/blog/{id}', action: [PostController::class, 'show']);
-
-Route::get('/comments', [App\Http\Controllers\CommentController::class, 'index']);
-
-Route::get('/comments/create', [App\Http\Controllers\CommentController::class, 'create']);
-
-Route::get('/tags', [App\Http\Controllers\TagController::class, 'index']);
-
-Route::get('/tags/create', [App\Http\Controllers\TagController::class, 'create']);
 
 Route::get('/tags/test-many', [App\Http\Controllers\TagController::class, 'testmanytomany']);
