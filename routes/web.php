@@ -26,3 +26,10 @@ Route::resource('tags', TagController::class);
 
 
 Route::get('/tags/test-many', [App\Http\Controllers\TagController::class, 'testmanytomany']);
+
+// Authentication Routes
+Route::get('/signup', [App\Http\Controllers\AuthController::class, 'showSignupForm']);
+Route::post('/signup', [App\Http\Controllers\AuthController::class, 'signup']);
+Route::get('/login', [App\Http\Controllers\AuthController::class, 'showLoginForm']);
+Route::post('/login', [App\Http\Controllers\AuthController::class, 'login']);
+Route::post('/logout', [App\Http\Controllers\AuthController::class, 'logout']);
